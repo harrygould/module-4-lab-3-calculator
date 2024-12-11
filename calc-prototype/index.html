@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator-101</title>
+    <style>
+      body {
+        font-family: "Courier New", Courier, monospace;
+        text-align: center;
+        margin-top: 50px;
+        color: white;
+      }
+      #rocket-meme {
+        display: block;
+        margin: auto;
+        width: 50%;
+        height: 50%;
+        margin-bottom: 30px;
+      }
+      .calculator {
+        display: inline-block;
+        padding: 20px;
+        border: 2px solid black;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        background: linear-gradient(
+          to right,
+          rgb(255, 92, 92),
+          rgb(90, 90, 255)
+        );
+      }
+      .input-field {
+        margin-bottom: 30px;
+        font-size: 1.2rem;
+        width: 60%;
+        height: 30px;
+        background-color: rgb(156, 240, 255);
+      }
+      .operator-buttons {
+        margin-bottom: 30px;
+      }
+      #button1 {
+        background-color: yellow;
+        padding: 10px;
+        border-radius: 10px;
+        font-weight: bolder;
+        font-size: 20px;
+      }
+      #button2 {
+        background-color: lightcoral;
+        padding: 10px;
+        border-radius: 10px;
+        font-weight: bolder;
+        font-size: 20px;
+      }
+      #button3 {
+        background-color: aquamarine;
+        padding: 10px;
+        border-radius: 10px;
+        font-weight: bolder;
+        font-size: 20px;
+      }
+      #button4 {
+        background-color: plum;
+        padding: 10px;
+        border-radius: 10px;
+        font-weight: bolder;
+        font-size: 20px;
+      }
+      #equalsbutton {
+        background-color: black;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        font-weight: bolder;
+        font-size: 20px;
+      }
+      #resetbutton {
+        background-color: white;
+        color: black;
+        padding: 10px;
+        border-radius: 10px;
+        font-weight: bolder;
+        font-size: 20px;
+      }
+      .control-buttons {
+        margin-bottom: 30px;
+      }
+      .result {
+        font-style: italic;
+        font-size: 1.2rem;
+        border-style: double;
+        border-color: black;
+        color: black;
+        background: conic-gradient(
+          from 0deg,
+          rgb(130, 218, 255),
+          rgb(255, 255, 119),
+          rgb(159, 255, 159),
+          rgb(130, 218, 255)
+        );
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="calculator">
+      <h1>Calculator-101</h1>
+      <img id="rocket-meme" src="https://i.imgflip.com/7hwtum.jpg" />
+      <input
+        type="number"
+        id="num1"
+        class="input-field"
+        placeholder="Enter first number"
+      />
+      <input
+        type="number"
+        id="num2"
+        class="input-field"
+        placeholder="Enter second number"
+      />
+
+      <div class="operator-buttons">
+        <button id="button1" onclick="setOperation('+')">+</button>
+        <button id="button2" onclick="setOperation('-')">-</button>
+        <button id="button3" onclick="setOperation('*')">x</button>
+        <button id="button4" onclick="setOperation('/')">/</button>
+      </div>
+
+      <div class="control-buttons">
+        <button id="equalsbutton" onclick="calculate()">=</button>
+        <button id="resetbutton" onclick="resetCalculator()">Reset</button>
+      </div>
+
+      <div class="result">
+        <p id="resultDisplay">Result:</p>
+      </div>
+    </div>
+
+    <script>
+      // assign variables to store numbers & operator
+      let num1 = 0,
+        num2 = 0,
+        operation = null;
+
+      // set operation with a function
+      function setOperation(op) {
+        operation = op;
+        console.log(`Operation set to: ${operation}`);
+      }
+
+      // calculate result with a function
+      function calculate() {
+        //merge with input values
+        num1 = parseFloat(document.getElementById("num1").value);
+        num2 = parseFloat(document.getElementById("num2").value);
+
+        // validate inputs as numbers
+        if (isNaN(num1) || isNaN(num2)) {
+          document.getElementById("resultDisplay").textContent =
+            "Please enter valid numbers you bloody moron :)";
+          return;
+        }
+
+        // perfrom calculation if entered correctly based on the selected operator
+        let result;
+        switch (operation) {
+          case "+":
+            result = num1 + num2;
+            break;
+          case "-":
+            result = num1 - num2;
+            break;
+          case "*":
+            result = num1 * num2;
+            break;
+          case "/":
+            if (num2 === 0) {
+              document.getElementById("resultDisplay").textContent =
+                "You can't divide by zero ya nufty! :)";
+              return;
+            }
+            result = num1 / num2;
+            break;
+          default:
+            document.getElementById("resultDisplay").textContent =
+              "Please select an operator to use the Calulator-101";
+        }
+
+        // display result
+        document.getElementById(
+          "resultDisplay"
+        ).textContent = `Result: ${result}`;
+      }
+
+      // function to reset the calculator
+      function resetCalculator() {
+        document.getElementById("num1").value = "";
+        document.getElementById("num2").value = "";
+        document.getElementById("resultDisplay").textContent = "Result: ";
+        operation = null;
+        console.log("Calculator101 reset.");
+      }
+    </script>
+  </body>
+</html>
